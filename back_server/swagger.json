@@ -1,0 +1,347 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "description": "This is a sample  documentation for simple CRUD player API, present by Binar Academy as a challenge chapter 8: documentation & SPA React. For this documentation, you can use the api for the simple feature.",
+    "version": "1.0.0",
+    "title": "Player List API",
+    "termsOfService": "https://github.com/narayoga/binar-challenge-chapter-8",
+    "contact": {
+      "email": "mbah.noname@gmail.com"
+    },
+    "license": {
+      "name": "binar academy",
+      "url": "https://github.com/narayoga/binar-challenge-chapter-8"
+    }
+  },
+  "host": "localhost:4000",
+  "schemes": [
+    "https",
+    "http"
+  ],
+  "tags": [
+    {
+      "name": "player",
+      "description": "controller on endpoint players"
+    }
+  ],
+  "paths": {
+    "/api/v1/players": {
+      "get": {
+        "tags": [
+          "player"
+        ],
+        "summary": "Get all players into the system",
+        "description": "",
+        "operationId": "getPlayers",
+        "produces": [
+          "application/json"
+        ],
+        "responses": {
+          "200": {
+            "description": "result",
+            "schema": {
+              "$ref": "#/definitions/getPlayers"
+            }
+          },
+          "500": {
+            "description": "Internal server error"
+          }
+        }
+      },
+      "post": {
+        "tags": [
+          "player"
+        ],
+        "summary": "Create player",
+        "description": "This can only be done by logged in.",
+        "operationId": "createPlayer",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "body",
+            "name": "body",
+            "description": "Created player object",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/createPlayer"
+            }
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "result: success",
+            "schema": {
+              "$ref": "#/definitions/getPlayers"
+            }
+          },
+          "400": {
+            "description": "Username/Email already taken"
+          },
+          "500": {
+            "description": "Internal server error"
+          }
+        }
+      }
+    },
+    "/api/v1/players/{id}": {
+      "get": {
+        "tags": [
+          "player"
+        ],
+        "summary": "Get player by id",
+        "description": "",
+        "operationId": "getUserById",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "The query id needs to be fetched. Use player1 for testing. ",
+            "required": true,
+            "type": "integer"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "result",
+            "schema": {
+              "$ref": "#/definitions/getPlayers"
+            }
+          },
+          "404": {
+            "description": "Player with {id} not found"
+          },
+          "500": {
+            "description": "Internal server error"
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "player"
+        ],
+        "summary": "Updated player",
+        "description": "This can only be done by logged in.",
+        "operationId": "updateUser",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "id that need to be updated",
+            "required": true,
+            "type": "integer"
+          },
+          {
+            "in": "body",
+            "name": "body",
+            "description": "Updated user object",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/createPlayer"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "result",
+            "schema": {
+              "$ref": "#/definitions/updatePlayer"
+            }
+          },
+          "404": {
+            "description": "Player with {id} not found"
+          },
+          "500": {
+            "description": "Internal server error"
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "player"
+        ],
+        "summary": "Delete player",
+        "description": "This can only be done by logged in player.",
+        "operationId": "deleteUser",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "The id that needs to be deleted",
+            "required": true,
+            "type": "integer"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "result",
+            "schema": {
+              "$ref": "#/definitions/deletePlayer"
+            }
+          },
+          "404": {
+            "description": "Player with {id} not found"
+          },
+          "500": {
+            "description": "Internal server error"
+          }
+        }
+      }
+    },
+    "/api/v1/players/exp/{id}": {
+      "post": {
+        "tags": [
+          "player"
+        ],
+        "summary": "Update exp player",
+        "description": "This can only be done by logged in player.",
+        "operationId": "update exp player",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "id that need to be updated",
+            "required": true,
+            "type": "integer"
+          },
+          {
+            "in": "body",
+            "name": "body",
+            "description": "Updated user object",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/createPlayer"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "result",
+            "schema": {
+              "$ref": "#/definitions/updatePlayer"
+            }
+          },
+          "404": {
+            "description": "Player with {id} not found"
+          },
+          "500": {
+            "description": "Internal server error"
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "getPlayers": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "integer",
+            "format": "int64",
+            "example": 1
+          },
+          "username": {
+            "type": "string",
+            "example": "PussySlayer613"
+          },
+          "email": {
+            "type": "string",
+            "example": "pussy.slay3r@gmail.com"
+          },
+          "password": {
+            "type": "string",
+            "example": "*****"
+          },
+          "experience": {
+            "type": "integer",
+            "example": 600000
+          },
+          "lvl": {
+            "type": "integer",
+            "example": 600
+          }
+        }
+      }
+    },
+    "createPlayer": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "username": {
+          "type": "string"
+        },
+        "email": {
+          "type": "string"
+        },
+        "password": {
+          "type": "string"
+        },
+        "experience": {
+          "type": "integer"
+        },
+        "lvl": {
+          "type": "integer"
+        }
+      },
+      "xml": {
+        "name": "data"
+      }
+    },
+    "updatePlayer": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "result": {
+            "type": "string",
+            "example": "succes"
+          },
+          "message": {
+            "type": "string",
+            "example": "Player with {id} successfully updated"
+          }
+        }
+      },
+      "xml": {
+        "name": "data"
+      }
+    },
+    "deletePlayer": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "result": {
+            "type": "string",
+            "example": "succes"
+          },
+          "message": {
+            "type": "string",
+            "example": "Player with {id}, was deleted successfully"
+          }
+        }
+      },
+      "xml": {
+        "name": "data"
+      }
+    }
+  }
+}
